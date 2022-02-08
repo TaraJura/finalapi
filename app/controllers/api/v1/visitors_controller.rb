@@ -21,10 +21,10 @@ module Api
 
         visitor = Visitor.find(params[:id])
 
-        if (visitor.connector == nil || visitor.connector.returned_at < Time.now)
+        if (visitor.connector.last == nil || visitor.connector.last&.returned_at < Time.now)
 
           card = Card.all.find do |card|
-            card.connector == nil
+            card.connector.last == nil || card.connector.last.returned_at < Time.now
           end
         
           Connector.create(visitor_id: params[:id],card: card,issued_at: Time.now, returned_at: Time.now + 5.years)
@@ -40,8 +40,11 @@ module Api
 #      /////////////////////////////////////////////////////////////////////////////////////// Return card
 
       def return_card
-        Connector.last.update!(returned_at: Time.now)
-        render jsonapi: Connector.last
+
+        visitor = Visitor.find(params[:id])
+
+        visitor.connector.last.update!(returned_at: Time.now)
+        render jsonapi: Connector.all
       end
 
 #      /////////////////////////////////////////////////////////////////////////////////////// New Visitor 

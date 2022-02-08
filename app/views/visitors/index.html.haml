@@ -23,20 +23,24 @@
         %td{:style => "width: 10%"}
           %p
             = visitor.name
-        %td{:style => "width: 10%"}
-          %p
-            = visitor.connector&.card_id
-        %td.additional-style
-          = link_to visitor_path(id: visitor.id), class:"btn btn-outline-dark" do
-            %i.material-icons.additional-style remove_red_eye
-            =t("Show")
-        - if (visitor.connector == nil || visitor.connector.returned_at < Time.now)
+          - if !(visitor.connector.last == nil || visitor.connector.last&.returned_at < Time.now)    
+            %td{:style => "width: 10%"}
+              %p
+                = visitor.connector.last&.card_id
+          - else
+            %td{:style => "width: 10%"}
+            
+          %td.additional-style
+            = link_to visitor_path(id: visitor.id), class:"btn btn-outline-dark" do
+              %i.material-icons.additional-style remove_red_eye
+              =t("Show")
+        - if (visitor.connector.last == nil || visitor.connector.last&.returned_at < Time.now)
           %td.additional-style
             = button_to issue_card_api_v1_visitor_path(id: visitor.id), class:"btn btn-outline-success" do
               %i.material-icons.additional-style
               =t("Issue a card")
         
-        - if !(visitor.connector == nil || visitor.connector.returned_at < Time.now)
+        - if !(visitor.connector.last == nil || visitor.connector.last&.returned_at < Time.now)
           %td.additional-style
             = button_to return_card_api_v1_visitor_path(id: visitor.id), class:"btn btn-outline-danger" do
               %i.material-icons.additional-style

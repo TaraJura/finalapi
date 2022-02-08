@@ -1,5 +1,5 @@
 class Visitor < ApplicationRecord
-  has_one :connector
+  has_many :connector
 
 
 
