@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ConnectorsController < JSONAPI::ResourceController
+    class ConnectorsController < BaseController
       skip_before_action :verify_authenticity_token
 
 
@@ -8,7 +8,10 @@ module Api
 
 
 
-
+      def index
+        connectors = Connector.all
+        render jsonapi: connectors
+      end
 
 
 
@@ -19,3 +22,11 @@ module Api
     end
   end
 end
+
+
+
+
+
+
+
+

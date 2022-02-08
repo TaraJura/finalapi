@@ -1,13 +1,15 @@
 module Api
   module V1
-    class CardsController < JSONAPI::ResourceController
+    class CardsController < BaseController
       skip_before_action :verify_authenticity_token
 
 
 
 
-
-
+      def index
+        cards = Card.all
+        render jsonapi: cards
+      end
 
 
 

@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      jsonapi_resources :visitors
-      jsonapi_resources :cards
-      jsonapi_resources :connectors
+      resources :visitors
+      resources :cards
+      resources :connectors
 
     end
   end
