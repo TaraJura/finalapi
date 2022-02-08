@@ -14,31 +14,38 @@ module Api
       def show
       end
 
+#      /////////////////////////////////////////////////////////////////////////////////////// Issue card 
+
       def issue_card
-        @visitors = Connector.create(visitor_id: params[:id],card_id:1)
+        Connector.create(visitor_id: params[:id],card_id:1,issued_at: Time.now)
+        render jsonapi: Connector.last
       end
+
+#      /////////////////////////////////////////////////////////////////////////////////////// Return card
 
       def return_card
-
+        Connector.last.update!(returned_at: Time.now)
+        render jsonapi: Connector.last
       end
-
+      
+#      /////////////////////////////////////////////////////////////////////////////////////// New Visitor 
       def new
-        @visitor = Visitor.new
+        visitor = Visitor.new
       end
 
       def edit
       end
 
       def create
-        @visitor = Visitor.new(visitor_params)
+        visitor = Visitor.new(visitor_params)
 
         respond_to do |format|
-          if @visitor.save
-            format.html { redirect_to visitor_url(@visitor), notice: "Visitor was successfully created." }
-            format.json { render :show, status: :created, location: @visitor }
+          if visitor.save
+            format.html { redirect_to visitor_url(visitor), notice: "Visitor was successfully created." }
+            format.json { render :show, status: :created, location: visitor }
           else
             format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @visitor.errors, status: :unprocessable_entity }
+            format.json { render json: visitor.errors, status: :unprocessable_entity }
           end
         end
       end
@@ -46,11 +53,11 @@ module Api
       def update
         respond_to do |format|
           if @visitor.update(visitor_params)
-            format.html { redirect_to visitor_url(@visitor), notice: "Visitor was successfully updated." }
-            format.json { render :show, status: :ok, location: @visitor }
+            format.html { redirect_to visitor_url(visitor), notice: "Visitor was successfully updated." }
+            format.json { render :show, status: :ok, location: visitor }
           else
             format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: @visitor.errors, status: :unprocessable_entity }
+            format.json { render json: visitor.errors, status: :unprocessable_entity }
           end
         end
       end
