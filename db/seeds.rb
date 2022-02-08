@@ -12,7 +12,9 @@ Visitor.create!(name:"Jason")
 Card.create!(number:1)
 Card.create!(number:2)
 Card.create!(number:3)
-Connector.create!(visitor_id:1,card_id:1)
+Card.create!(number:4)
+Card.create!(number:5)
+Connector.create!(visitor_id:1,card_id:1,issued_at: Time.now,returned_at: Time.now + 5.years)
 
 
 

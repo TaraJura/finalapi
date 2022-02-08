@@ -13,7 +13,10 @@
           =t "Card ID"
       %th{:scope => "col", :style => "width: %"}
       %th{:scope => "col", :style => "width: %"}
-    
+      %th{:scope => "col", :style => "width: %"}
+      %th{:scope => "col", :style => "width: %"}
+      %th{:scope => "col", :style => "width: %"}
+      
   %tbody
     - @visitors.each do |visitor|
       %tr
@@ -27,16 +30,19 @@
           = link_to visitor_path(id: visitor.id), class:"btn btn-outline-dark" do
             %i.material-icons.additional-style remove_red_eye
             =t("Show")
-
-        %td.additional-style
-          = link_to api_v1_visitors_path(id: visitor.id), class:"btn btn-outline-dark" do
-            %i.material-icons.additional-style
-            =t("Issue a card")
+        - if (visitor.connector == nil || visitor.connector.returned_at < Time.now)
+          %td.additional-style
+            = button_to issue_card_api_v1_visitor_path(id: visitor.id), class:"btn btn-outline-success" do
+              %i.material-icons.additional-style
+              =t("Issue a card")
         
+        - if !(visitor.connector == nil || visitor.connector.returned_at < Time.now)
+          %td.additional-style
+            = button_to return_card_api_v1_visitor_path(id: visitor.id), class:"btn btn-outline-danger" do
+              %i.material-icons.additional-style
+              =t("Return card")
         %td.additional-style
-          = link_to api_v1_visitors_path(id: visitor.id), class:"btn btn-outline-dark" do
-            %i.material-icons.additional-style
-            =t("Return card")
+        %td.additional-style
 %br/
 %br/
 = link_to new_visitor_path, class:"btn btn-secondary new_visitor_button " do

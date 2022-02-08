@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :visitors do 
-        get "issue_card", on: :member
-        get "return_card", on: :member
+        post "issue_card", on: :member
+        post "return_card", on: :member
       end
 
       resources :cards

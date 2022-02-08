@@ -14,19 +14,27 @@ module Api
       def show
       end
 
-#      /////////////////////////////////////////////////////////////////////////////////////// Issue card 
+#      /////////////////////////////////////////////////////////////////////////////////////// Issue card
+
 
       def issue_card
 
+        visitor = Visitor.find(params[:id])
 
+        if (visitor.connector == nil || visitor.connector.returned_at < Time.now)
 
+          card = Card.all.find do |card|
+            card.connector == nil
+          end
+        
+          Connector.create(visitor_id: params[:id],card: card,issued_at: Time.now, returned_at: Time.now + 5.years)
+          render jsonapi: Connector.all
 
+        else
 
+          render jsonapi: Connector.all
+        end
 
-
-
-        Connector.create(visitor_id: params[:id],card_id:1,issued_at: Time.now)
-        render jsonapi: Connector.last
       end
 
 #      /////////////////////////////////////////////////////////////////////////////////////// Return card
