@@ -5,7 +5,7 @@ module Api
     class CardResource < JSONAPI::Resource
       attributes :number
 
-      has_many :connectors
+      has_one :connector
 
     end
   end

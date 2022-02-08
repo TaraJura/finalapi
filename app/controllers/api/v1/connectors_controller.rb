@@ -9,6 +9,18 @@ module Api
 
 
       def index
+
+        def @check
+         Connector.each do |c| 
+           c.card 
+         end
+        end
+
+
+
+
+
+
         connectors = Connector.all
         render jsonapi: connectors
       end

@@ -1,0 +1,45 @@
+
+%h1 
+  =t 'Active Visitors'
+%br/
+%table.table.table-striped.table-hover.table-borderless
+  %thead.table-dark
+    %tr
+      %th{:scope => "col", :style => "width: %"}
+        %strong 
+          =t "Name"
+      %th{:scope => "col", :style => "width: %"}
+        %strong 
+          =t "Card ID"
+      %th{:scope => "col", :style => "width: %"}
+      %th{:scope => "col", :style => "width: %"}
+    
+  %tbody
+    - @visitors.each do |visitor|
+      %tr
+        %td{:style => "width: 10%"}
+          %p
+            = visitor.name
+        %td{:style => "width: 10%"}
+          %p
+            = visitor.connector&.card_id
+        %td.additional-style
+          = link_to visitor_path(id: visitor.id), class:"btn btn-outline-dark" do
+            %i.material-icons.additional-style remove_red_eye
+            =t("Show")
+
+        %td.additional-style
+          = link_to api_v1_visitors_path(id: visitor.id), class:"btn btn-outline-dark" do
+            %i.material-icons.additional-style
+            =t("Issue a card")
+        
+        %td.additional-style
+          = link_to api_v1_visitors_path(id: visitor.id), class:"btn btn-outline-dark" do
+            %i.material-icons.additional-style
+            =t("Return card")
+%br/
+%br/
+= link_to new_visitor_path, class:"btn btn-secondary new_visitor_button " do
+  = t("New visitor")
+
+

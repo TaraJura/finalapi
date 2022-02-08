@@ -1,0 +1,51 @@
+= form_with(model: visitor) do |form|
+  - if visitor.errors.any?
+    %div{:style => "color: red"}
+      %h2
+        = pluralize(visitor.errors.count, "error")
+        prohibited this visitor from being saved:
+      %ul
+        - visitor.errors.each do |error|
+          %li= error.full_message
+  %div
+    = form.label :name, style: "display: block"
+    = form.text_field :name
+  %div
+    = form.label :email, style: "display: block"
+    = form.text_field :email
+  %div
+    = form.label :phone, style: "display: block"
+    = form.text_field :phone
+  %div
+    = form.label :identity_card_type, style: "display: block"
+    = form.select :identity_card_type, options_for_select(["IDcard", "Passport", "Driving license"])
+
+  %div
+    = form.label :identity_card_number, style: "display: block"
+    = form.number_field :identity_card_number
+  %div
+    = form.label "ID validity", style: "display: block"
+    = form.date_field :visitor_id_expiration
+  %div
+    = form.label :escort_flag, "escort", style: "display: block"
+    = form.check_box :escort_flag
+  #all_zones_div{:style => "display: block;"}
+    = form.fields_for :visitorsZoneAcce do |zone_form|
+      = zone_form.label :zone_id
+      %br/
+
+  %div
+    = label_tag(:all_zones, "All Zones")
+    = check_box_tag :all_zones, "1", false, onchange:"allzonesfunction()", type:"checkbox", id:"myCheck"
+  %br/
+  = form.collection_radio_buttons :visitor_type, [["1", "One-Time Access"], ["2","Permanent Access"],["3", "Temporary Access"]], :first, :last do |b|
+    .your-class
+      = b.radio_button onchange:"hiddendivfortime()"
+      = b.label
+  #visitor_expires_div{:style => "display: none;"}
+    = form.label :expires, style: "display: block"
+    = form.date_field :expires
+  %br/
+  %div
+    = form.submit class:"btn btn-success" do
+      =t "Create visitor"

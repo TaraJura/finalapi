@@ -17,6 +17,14 @@ module Api
 #      /////////////////////////////////////////////////////////////////////////////////////// Issue card 
 
       def issue_card
+
+
+
+
+
+
+
+
         Connector.create(visitor_id: params[:id],card_id:1,issued_at: Time.now)
         render jsonapi: Connector.last
       end
@@ -27,7 +35,7 @@ module Api
         Connector.last.update!(returned_at: Time.now)
         render jsonapi: Connector.last
       end
-      
+
 #      /////////////////////////////////////////////////////////////////////////////////////// New Visitor 
       def new
         visitor = Visitor.new

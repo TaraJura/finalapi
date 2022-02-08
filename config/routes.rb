@@ -10,10 +10,8 @@ Rails.application.routes.draw do
 
       resources :cards
       resources :connectors
-
-
-
     end
   end
-
+  resources :visitors
+  root "client#index"
 end

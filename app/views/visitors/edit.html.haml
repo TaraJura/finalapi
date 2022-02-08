@@ -1,0 +1,37 @@
+%h1
+  =t "Editing visitor"
+= form_with(model: @visitor) do |form|
+  %div
+    = form.label :name, style: "display: block"
+    = form.text_field :name
+  %div
+    = form.label :email, style: "display: block"
+    = form.text_field :email
+  %div
+    = form.label :phone, style: "display: block"
+    = form.text_field :phone
+  %div
+    = form.label :identity_card_type, style: "display: block"
+    = form.select :identity_card_type, options_for_select(["IDcard", "Passport", "Driving license"])
+  .visually-hidden
+    = form.label :customer_id, style: "display: block"
+    = form.text_field :customer_id, value: session[:current_customer]
+  %div
+    = form.label :identity_card_number, style: "display: block"
+    = form.number_field :identity_card_number
+  %div
+  %br/
+  = form.collection_radio_buttons :visitor_type, [["1", "One-Time Access"], ["2","Permanent Access"],["3", "Temporary Access"]], :first, :last do |b|
+    .your-class
+      = b.radio_button onchange:"hiddendivfortime()"
+      = b.label
+  #visitor_expires_div{:style => "display: none;"}
+    = form.label :expires, style: "display: block"
+    = form.date_field :expires
+  %br/
+  %div
+    = form.submit class:"btn btn-success"
+%br/
+%div
+  = link_to t("Show this visitor"), @visitor, class:"btn btn-secondary"
+  = link_to t("Back to visitors"), visitors_path, class:"btn btn-dark"

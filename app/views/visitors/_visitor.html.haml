@@ -1,0 +1,32 @@
+%p
+  %strong
+    =t "Name"
+  = visitor.name
+%p
+  %strong
+    =t "Email"
+  = visitor.email
+%p
+  %strong
+    =t "Phone"
+  = visitor.phone
+%p
+  %strong
+    =t "Identity card type"
+  = visitor.identity_card_type
+%p
+  %strong
+    =t "Identity card number"
+  = visitor.identity_card_number
+%p
+  %strong
+    =t "Identity card Expiration Time"
+  = visitor.visitor_id_expiration
+%p
+  %strong
+    =t "Expires"
+  = visitor.expires&.strftime('%d-%m-%Y')
+%p
+  %strong
+    =t "Escort"
+  = visitor.escort_flag

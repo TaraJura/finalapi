@@ -1,0 +1,7 @@
+= render @visitor
+%div
+  = link_to t("Edit this visitor"), edit_visitor_path(@visitor),  class:"btn btn-secondary"
+  = link_to t("Back to visitors"), visitors_path, class:"btn btn-dark"
+  %br/
+  %br/
+  = button_to t("Destroy this visitor"), @visitor, method: :delete, class:"btn btn-danger"

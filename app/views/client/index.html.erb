@@ -1,0 +1,14 @@
+
+<div>
+  <h1> API Client </h1>
+        <hr>
+          <h1>Cards info</h1>
+          <h3>All cards:</h3> <p> <%= Card.all.inspect %> </p>
+          <h3>Rented cards:</h3> <p> <%= Connector.all.inspect %> </p>
+</div>
+<hr>
+<h1>Possible actions:</h1>
+
+<%= link_to 'Issue a card', api_v1_visitors_path %>
+<%= link_to 'Return card', api_v1_visitors_path %>
+

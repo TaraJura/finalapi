@@ -1,3 +1,3 @@
 class Card < ApplicationRecord
-  has_many :connectors
+  has_one :connector
 end

@@ -1,0 +1,6 @@
+%h1 
+  =t "New visitor"
+= render "form", visitor: @visitor
+%br/
+%div
+  = link_to t("Back to visitors"), visitors_path, class:"btn btn-dark"
