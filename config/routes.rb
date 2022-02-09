@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         post "return_card", on: :member
       end
 
-      resources :cards
+      resources :cards 
       resources :connectors
     end
   end

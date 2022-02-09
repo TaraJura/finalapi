@@ -15,6 +15,23 @@ module Api
 
 
 
+
+      def create
+        card = Card.new(number: params[:number])
+
+        if card.save
+          render jsonapi: card
+        else
+          render jsonapi: card.errors, status: :unproccessable_entity
+        end
+      end
+
+
+      private
+
+      def card_params
+        params.require(:card).permit(:number)
+      end
     end
   end
 end

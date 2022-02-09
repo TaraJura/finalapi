@@ -7,6 +7,7 @@ module Api
       include JSONAPI::Fetching
       include JSONAPI::Filtering
       include JSONAPI::Pagination
+      include JSONAPI::Deserialization
 
       DEFAULT_PAGE_SIZE = 30
       before_action :authenticate

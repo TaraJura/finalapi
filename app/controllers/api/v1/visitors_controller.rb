@@ -55,19 +55,23 @@ module Api
       def edit
       end
 
+#      /////////////////////////////////////////////////////////////////////////////////////// Visitor create  
+
+
       def create
+        
         visitor = Visitor.new(visitor_params)
 
-        respond_to do |format|
           if visitor.save
-            format.html { redirect_to visitor_url(visitor), notice: "Visitor was successfully created." }
-            format.json { render :show, status: :created, location: visitor }
+            render jsonapi: visitor
           else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: visitor.errors, status: :unprocessable_entity }
+            render jsonapi: visitor.errors, status: :unproccessable_entity
           end
         end
-      end
+
+
+
+
 
       def update
         respond_to do |format|
@@ -90,14 +94,21 @@ module Api
         end
       end
 
-      private
         def set_visitor
           @visitor = Visitor.find(params[:id])
         end
 
-        def visitor_params
-          params.require(:visitor).permit(:name, :email, :phone, :identity_card_type, :card_id, :identity_card_number, :expires, :customer_id, :visitor_type, :visitor_id_expiration, :escort_flag)
-        end
+       # def visitor_params
+       #  params.require(:visitor).permit(:name, :email, :phone, :identity_card_type, :card_id, :identity_card_number, :expires, :customer_id, :visitor_type, :visitor_id_expiration, :escort_flag)
+       # end
+       def visitor_params
+        jsonapi_deserialize(
+          params,
+          only: [
+            :name, :email, :phone, :identity_card_type, :card_id, :identity_card_number, :expires, :customer_id, :visitor_type, :visitor_id_expiration, :escort_flag
+          ]
+        )
+      end
         
         def jsonapi_serializer_class(resource, is_collection)
           JSONAPI::Rails.serializer_class(resource, is_collection)

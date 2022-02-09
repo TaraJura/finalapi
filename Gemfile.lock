@@ -89,6 +89,9 @@ GEM
       reline (>= 0.2.7)
     digest (3.1.0)
     erubi (1.10.0)
+    ethon (0.15.0)
+      ffi (>= 1.15.0)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     haml (5.2.2)
@@ -210,6 +213,8 @@ GEM
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     web-console (4.2.0)
@@ -247,6 +252,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   stimulus-rails
   turbo-rails
+  typhoeus
   tzinfo-data
   web-console
   webdrivers
