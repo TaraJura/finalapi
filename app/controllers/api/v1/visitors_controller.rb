@@ -72,21 +72,21 @@ module Api
 
 
 
-
       def update
-        respond_to do |format|
-          if @visitor.update(visitor_params)
-            format.html { redirect_to visitor_url(visitor), notice: "Visitor was successfully updated." }
-            format.json { render :show, status: :ok, location: visitor }
-          else
-            format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: visitor.errors, status: :unprocessable_entity }
-          end
-        end
+
+        visitor = Visitor.find(params[:id])
+
+        visitor.update(visitor_params)
+        render jsonapi: visitor
+      
       end
 
       def destroy
-        @visitor.destroy
+
+        visitor = Visitor.find(params[:id])
+
+        visitor.destroy
+        render jsonapi: visitor
 
         respond_to do |format|
           format.html { redirect_to visitors_url, notice: "Visitor was successfully destroyed." }
