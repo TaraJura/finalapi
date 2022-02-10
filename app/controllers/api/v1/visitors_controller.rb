@@ -43,9 +43,6 @@ module Api
           method: "post"
         ).run
 
-
-
-
       end
 
 #      /////////////////////////////////////////////////////////////////////////////////////// Return card
@@ -56,17 +53,19 @@ module Api
 
         visitor.connector.last.update!(returned_at: Time.now)
         render jsonapi: Connector.all
+        
       end
 
-#      /////////////////////////////////////////////////////////////////////////////////////// New Visitor 
+
       def new
         visitor = Visitor.new
       end
 
+
       def edit
+
       end
 
-#      /////////////////////////////////////////////////////////////////////////////////////// Visitor create  
 
 
       def create
@@ -109,9 +108,6 @@ module Api
           @visitor = Visitor.find(params[:id])
         end
 
-       # def visitor_params
-       #  params.require(:visitor).permit(:name, :email, :phone, :identity_card_type, :card_id, :identity_card_number, :expires, :customer_id, :visitor_type, :visitor_id_expiration, :escort_flag)
-       # end
        def visitor_params
         jsonapi_deserialize(
           params,
@@ -124,7 +120,6 @@ module Api
         def jsonapi_serializer_class(resource, is_collection)
           JSONAPI::Rails.serializer_class(resource, is_collection)
         rescue NameError
-          # your serializer class naming implementation
         end
     end
   end

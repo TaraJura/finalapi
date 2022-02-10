@@ -5,9 +5,6 @@ module Api
 
 
 
-
-
-
       def index
 
         connectors = Connector.all
@@ -15,11 +12,25 @@ module Api
         
       end
 
+      def update
+
+        connector = Connector.find(params[:id])
+
+        connector.update(connector_params)
+        render jsonapi: connector
+      
+      end
 
 
 
-
-
+      def connector_params
+        jsonapi_deserialize(
+          params,
+          only: [
+            :issued_at, :returned_at, :visitor_id
+          ]
+        )
+      end
 
     end
   end
