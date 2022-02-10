@@ -35,6 +35,17 @@ module Api
           render jsonapi: Connector.all
         end
 
+
+
+        response = Typhoeus::Request.new(
+          "http://localhost:3000/api/v1/connectors",
+          params: Connector.create(visitor_id: params[:id],issued_at: Time.now, returned_at: Time.now + 5.years).serializable_hash,
+          method: "post"
+        ).run
+
+
+
+
       end
 
 #      /////////////////////////////////////////////////////////////////////////////////////// Return card
