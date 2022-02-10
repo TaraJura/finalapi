@@ -12,6 +12,7 @@ module Api
 
         connectors = Connector.all
         render jsonapi: connectors
+        
       end
 
 
