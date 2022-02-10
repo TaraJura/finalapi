@@ -52,8 +52,15 @@ module Api
         visitor = Visitor.find(params[:id])
 
         visitor.connector.last.update!(returned_at: Time.now)
+        connector = visitor.connector.last
         render jsonapi: Connector.all
         
+        response = Typhoeus::Request.new(
+          "http://localhost:3000/api/v1/connectors/#{connector.id}",
+          params: ConnectorSerializer.new(connector).serializable_hash,
+          method: "patch"
+        ).run
+
       end
 
 

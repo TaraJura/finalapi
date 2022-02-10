@@ -27,7 +27,7 @@ module Api
         jsonapi_deserialize(
           params,
           only: [
-            :issued_at, :returned_at, :visitor_id
+            :id, :issued_at, :returned_at, :visitor_id
           ]
         )
       end

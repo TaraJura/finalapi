@@ -91,6 +91,8 @@ GEM
     erubi (1.10.0)
     ethon (0.15.0)
       ffi (>= 1.15.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -241,6 +243,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  faker (~> 2.19)
   haml (~> 5.2, >= 5.2.2)
   importmap-rails
   jbuilder
